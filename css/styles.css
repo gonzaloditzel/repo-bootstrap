@@ -1,0 +1,9 @@
+.height {
+  height: 60vh;
+}
+
+@media (max-width: 768px) {
+  .text-sm {
+    text-align: center;
+  }
+}
