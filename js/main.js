@@ -54,24 +54,21 @@ const agregarAlCarrito = (idDelDestino) => {
     const indiceEncontradoCarrito = cart.findIndex((elemento) => {
         return elemento.id === idDelDestino;
     });
+    swal({
+        title: "Destino agregado al carrito",
+        timer: 1200 ,
+    });
     
-    // const cantPasajeros = [...document.querySelectorAll(".cantidadPasajeros")];
-    // const inputCantidad = cantPasajeros.filter((element) => {
-    //     element.getAttribute("id") === idDelDestino
-    //     console.log("ID: "+ element.getAttribute("id"));
-    // });
-        
-        
+    const cantPasajeros = document.getElementById(`cantidad-${idDelDestino}`).value;
+                
     if(indiceEncontradoCarrito === -1){
         const productoAgregar = destinos.find((elemento) => elemento.id === idDelDestino);
-        productoAgregar.cantidad = 1;
-        // productoAgregar.cantidad = parseInt(cantPasajeros);
+        productoAgregar.cantidad = parseInt(cantPasajeros);
         cart.push(productoAgregar);
         dibujarCarrito();
     }
     else{
-        cart[indiceEncontradoCarrito].cantidad += 1;
-        // cart[indiceEncontradoCarrito].cantidad += parseInt(cantPasajeros);
+        cart[indiceEncontradoCarrito].cantidad += parseInt(cantPasajeros);
         dibujarCarrito();
     }
 }
@@ -137,9 +134,10 @@ const filtrar = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20">
                         <path d="M256 288c79.53 0 144-64.47 144-144s-64.47-144-144-144c-79.52 0-144 64.47-144 144S176.5 288 256 288zM351.1 320H160c-88.36 0-160 71.63-160 160c0 17.67 14.33 32 31.1 32H480c17.67 0 31.1-14.33 31.1-32C512 391.6 440.4 320 351.1 320z"/></svg>
                         Pasajeros
-                        <input type="number" id="cantidadPasajeros + ${destino.id}" value="1">
+                        <input type="number" id="cantidad-${destino.id}" value="1">
                     </li>
-                    <button class="btn btn-danger" onClick = "agregarAlCarrito(${destino.id})">Agregar al carrito</button>
+                    <button type="button"
+                    class="btn btn-danger" onClick = "agregarAlCarrito(${destino.id})">Agregar al carrito</button>
                 </div>
             </div>`
         }
@@ -193,4 +191,6 @@ const mostrarMensaje = () => {
     <div class="mensaje-final">Gracias ${nombreCliente} por tu compra!</div>`;
     modalCarrito.innerHTML = mensaje;
 }
+
+
 
