@@ -1,3 +1,14 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html{
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--scroll-padding, 116px);
+}
+
 .height {
   height: 60vh;
 }
@@ -35,12 +46,16 @@
   display: flex;
   justify-content: space-between;
   list-style-type: none;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
 
 .pasajeros input{
   width: 60px;
   text-align: center;
+}
+
+.pasajeros .fechaActual{
+  width: 120px;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -90,11 +105,13 @@ input[type=number]::-webkit-outer-spin-button {
   text-align: center;
 }
 
-#resultado{
+#resultado, #hotel{
   display: inline-flex;
   flex-wrap: wrap;
   max-width: 70vw;
 }
+
+
 
 .contenedorResultado{
   display: flex;
@@ -147,3 +164,16 @@ label{
   justify-content: center;
   margin-top: 10px;
 }
+
+.swal-footer  {
+  text-align: center;
+}
+
+.titulos{
+  text-align: center;
+  padding: 10px;
+  background-color: black;
+  color: white;
+}
+
+
