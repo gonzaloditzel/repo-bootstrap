@@ -1,0 +1,99 @@
+[
+    {
+        "id": 1,
+        "nombre": "Nahuel Huapi",
+        "precio": 9950,
+        "imagen": "./img/hotel1.jpg"
+    },
+    {
+        "id": 2,
+        "nombre": "Sol Bariloche",
+        "precio": 7550,
+        "imagen": "./img/hotel2.jpg"
+    },
+    {
+        "id": 3,
+        "nombre": "Gran Meliá Iguazú",
+        "precio": 9950,
+        "imagen": "./img/hotel3.jpg"
+    },
+    {
+        "id": 4,
+        "nombre": "Grand Crucero Iguazú",
+        "precio": 9950,
+        "imagen": "./img/hotel4.jpg"
+    }, 
+    {
+        "id": 5,
+        "nombre": "Alto Calafate",
+        "precio": 9950,
+        "imagen": "./img/hotel5.jpg"
+    },
+    {
+        "id": 6,
+        "nombre": "Mirador del Lago",
+        "precio": 9950,
+        "imagen": "./img/hotel6.jpg"
+    },
+    {
+        "id": 7,
+        "nombre": "Hotel Del Glaciar",
+        "precio": 9950,
+        "imagen": "./img/hotel7.jpg"
+    },
+    {
+        "id": 8,
+        "nombre": "Los Notros",
+        "precio": 9950,
+        "imagen": "./img/hotel8.jpg"
+    },
+    {
+        "id": 9,
+        "nombre": "Diplomatic",
+        "precio": 9950,
+        "imagen": "./img/hotel9.jpg"
+    },
+    {
+        "id": 10,
+        "nombre": "Ibis Mendoza",
+        "precio": 7550,
+        "imagen": "./img/hotel10.jpg"
+    },
+    {
+        "id": 11,
+        "nombre": "Cordoba Center",
+        "precio": 9950,
+        "imagen": "./img/hotel11.jpg"
+    },
+    {
+        "id": 12,
+        "nombre": "Windsor",
+        "precio": 9950,
+        "imagen": "./img/hotel12.jpg"
+    }, 
+    {
+        "id": 13,
+        "nombre": "Gran Hotel San Luis",
+        "precio": 9950,
+        "imagen": "./img/hotel13.jpg"
+    },
+    {
+        "id": 14,
+        "nombre": "Ibis San Luis",
+        "precio": 9950,
+        "imagen": "./img/hotel14.jpg"
+    },
+    {
+        "id": 15,
+        "nombre": "Albatros",
+        "precio": 9950,
+        "imagen": "./img/hotel15.jpg"
+    },
+    {
+        "id": 16,
+        "nombre": "Los Acebos",
+        "precio": 9950,
+        "imagen": "./img/hotel16.jpg"
+    }
+
+]

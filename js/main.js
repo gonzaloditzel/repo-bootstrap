@@ -49,14 +49,14 @@ let destinos = [
     }
 ];
 
-
 const agregarAlCarrito = (idDelDestino) => {
     const indiceEncontradoCarrito = cart.findIndex((elemento) => {
         return elemento.id === idDelDestino;
     });
     swal({
         title: "Destino agregado al carrito",
-        timer: 1200 ,
+        timer: 1500,
+        icon: "success"
     });
     
     const cantPasajeros = document.getElementById(`cantidad-${idDelDestino}`).value;
@@ -133,19 +133,21 @@ const filtrar = () => {
                     <li class="pasajeros">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20">
                         <path d="M256 288c79.53 0 144-64.47 144-144s-64.47-144-144-144c-79.52 0-144 64.47-144 144S176.5 288 256 288zM351.1 320H160c-88.36 0-160 71.63-160 160c0 17.67 14.33 32 31.1 32H480c17.67 0 31.1-14.33 31.1-32C512 391.6 440.4 320 351.1 320z"/></svg>
-                        Pasajeros
                         <input type="number" id="cantidad-${destino.id}" value="1">
-                    </li>
+                        <input type="date" id="fechaActual" value="2022-06-08" class="fechaActual">
+                        </li>
                     <button type="button"
                     class="btn btn-danger" onClick = "agregarAlCarrito(${destino.id})">Agregar al carrito</button>
                 </div>
             </div>`
         }
+        
     }
-
+    
     if(resultado.innerHTML === ''){
         resultado.innerHTML += `<li class="undefined">Producto no encontrado...</li>`;
     }
+    
 };
 
 btn.addEventListener('click', filtrar);
@@ -192,5 +194,42 @@ const mostrarMensaje = () => {
     modalCarrito.innerHTML = mensaje;
 }
 
+const hotel1 = document.querySelector("#hotel");
+
+fetch('/hotel.json')
+.then((res) => res.json())
+.then((data) =>{
+    data.forEach((hotel) => {
+        const div = document.createElement('div')
+        div.innerHTML = `
+        <div class="card mx-2 mb-5" style="width: 18rem; ">
+        <img src=${hotel.imagen} class="card-img-top card-img" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">${hotel.nombre}</h5>
+                <p id="precio" class="card-text">$ ${hotel.precio}</p>
+                <li class="pasajeros">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20">
+                    <path d="M256 288c79.53 0 144-64.47 144-144s-64.47-144-144-144c-79.52 0-144 64.47-144 144S176.5 288 256 288zM351.1 320H160c-88.36 0-160 71.63-160 160c0 17.67 14.33 32 31.1 32H480c17.67 0 31.1-14.33 31.1-32C512 391.6 440.4 320 351.1 320z"/></svg>
+                    <input type="number" id="cantidad-${hotel.id}" value="1">
+                    <input type="date" id="fechaActual" value="2022-06-08" class="fechaActual">
+                </li>
+                <button type="button" class="btn btn-danger" onClick = "agregarAlCarrito(${hotel.id})">Agregar al carrito</button>
+            </div>
+        </div>
+        `
+        hotel1.append(div)
+    })
+})
+
+const navigationHeight = document.querySelector('.primaryNavigation').offsetHeight;
+
+document.documentElement.style.setProperty('--scroll-padding', navigationHeight + "px");
 
 
+fetch('/hotel.json')
+.then((res) => res.json())
+.then((data) =>{
+    data.forEach((hotel) => {
+       console.log(hotel);
+    })
+})
