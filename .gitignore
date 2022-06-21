@@ -1,1 +1,3 @@
-node_modules*
+*.ia
+*.temp
+node_modules/
