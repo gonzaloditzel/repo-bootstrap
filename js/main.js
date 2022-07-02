@@ -49,6 +49,8 @@ let destinos = [
     }
 ];
 
+
+
 const agregarAlCarrito = (idDelDestino) => {
     const indiceEncontradoCarrito = cart.findIndex((elemento) => {
         return elemento.id === idDelDestino;
@@ -60,10 +62,12 @@ const agregarAlCarrito = (idDelDestino) => {
     });
     
     const cantPasajeros = document.getElementById(`cantidad-${idDelDestino}`).value;
+    const mostrarFecha = document.getElementById(`fechaActual-${idDelDestino}`).value;
                 
     if(indiceEncontradoCarrito === -1){
         const productoAgregar = destinos.find((elemento) => elemento.id === idDelDestino);
         productoAgregar.cantidad = parseInt(cantPasajeros);
+        productoAgregar.fechaActual = mostrarFecha;
         cart.push(productoAgregar);
         dibujarCarrito();
     }
@@ -88,6 +92,7 @@ const dibujarCarrito = () => {
             <img class= "card-img" src="${destino.imagen}"/>
             <div class="destino-details">${destino.nombre}</div>
             <div class="destino-details"> Cantidad de pasajeros: ${destino.cantidad}</div>
+            <div class="destino-details"> Fecha elegida: ${destino.fechaActual}</div>
             <div class="destino-details"> Precio por persona: $ ${destino.precio}</div>
             <div class="destino-details"> Subtotal: $ ${destino.precio * destino.cantidad}</div>
             <button class="btn btn-danger" id="remove-destino" onClick="removeDestino(${indice})">Eliminar</button>`;
@@ -111,10 +116,12 @@ const removeDestino = (indice) => {
     dibujarCarrito();
 }
 
+const currentDate = moment().format( 'YYYY-MM-DD' );
 
 const formulario = document.querySelector('#search');
 const btn = document.querySelector('#btn');
 const resultado = document.querySelector('#resultado');
+
 
 const filtrar = () => {
 
@@ -133,8 +140,8 @@ const filtrar = () => {
                     <li class="pasajeros">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20">
                         <path d="M256 288c79.53 0 144-64.47 144-144s-64.47-144-144-144c-79.52 0-144 64.47-144 144S176.5 288 256 288zM351.1 320H160c-88.36 0-160 71.63-160 160c0 17.67 14.33 32 31.1 32H480c17.67 0 31.1-14.33 31.1-32C512 391.6 440.4 320 351.1 320z"/></svg>
-                        <input type="number" id="cantidad-${destino.id}" value="1">
-                        <input type="date" id="fechaActual" value="2022-06-08" class="fechaActual">
+                        <input type="number" id="cantidad-${destino.id}" value="1" min="1">
+                        <input type="date" id="fechaActual-${destino.id}" value="${currentDate}" class="fechaActual">
                         </li>
                     <button type="button"
                     class="btn btn-danger" onClick = "agregarAlCarrito(${destino.id})">Agregar al carrito</button>
@@ -195,10 +202,12 @@ const mostrarMensaje = () => {
 }
 
 const hotel1 = document.querySelector("#hotel");
+let listaHoteles = [];
 
 fetch('/hotel.json')
 .then((res) => res.json())
 .then((data) =>{
+    listaHoteles = data;
     data.forEach((hotel) => {
         const div = document.createElement('div')
         div.innerHTML = `
@@ -210,10 +219,10 @@ fetch('/hotel.json')
                 <li class="pasajeros">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20">
                     <path d="M256 288c79.53 0 144-64.47 144-144s-64.47-144-144-144c-79.52 0-144 64.47-144 144S176.5 288 256 288zM351.1 320H160c-88.36 0-160 71.63-160 160c0 17.67 14.33 32 31.1 32H480c17.67 0 31.1-14.33 31.1-32C512 391.6 440.4 320 351.1 320z"/></svg>
-                    <input type="number" id="cantidad-${hotel.id}" value="1">
-                    <input type="date" id="fechaActual" value="2022-06-08" class="fechaActual">
+                    <input type="number" id="cantidad-${hotel.id}" value="1" min="1">
+                    <input type="date" id="fechaActual-${hotel.id}" value="${currentDate}" class="fechaActual">
                 </li>
-                <button type="button" class="btn btn-danger" onClick = "agregarAlCarrito(${hotel.id})">Agregar al carrito</button>
+                <button type="button" class="btn btn-danger" onClick = "agregarAlCarrito2(${hotel.id})">Agregar al carrito</button>
             </div>
         </div>
         `
@@ -225,11 +234,30 @@ const navigationHeight = document.querySelector('.primaryNavigation').offsetHeig
 
 document.documentElement.style.setProperty('--scroll-padding', navigationHeight + "px");
 
+const agregarAlCarrito2 = (idDelHotel) => {
+    const indiceEncontradoCarrito = cart.findIndex((elemento) => {
+        return elemento.id === idDelHotel;
+    });
+    swal({
+        title: "Hotel agregado al carrito",
+        timer: 1500,
+        icon: "success"
+    });
+    
+    const cantPasajeros2 = document.getElementById(`cantidad-${idDelHotel}`).value;
+    const mostrarFecha = document.getElementById(`fechaActual-${idDelHotel}`).value;
+                
+    if(indiceEncontradoCarrito === -1){
+        const productoAgregar = listaHoteles.find((elemento) => elemento.id === idDelHotel);
+        productoAgregar.cantidad = parseInt(cantPasajeros2);
+        productoAgregar.fechaActual = mostrarFecha;
+        cart.push(productoAgregar);
+        dibujarCarrito();
+    }
+    else{
+        cart[indiceEncontradoCarrito].cantidad += parseInt(cantPasajeros2);
+        dibujarCarrito();
+    }
+}
 
-fetch('/hotel.json')
-.then((res) => res.json())
-.then((data) =>{
-    data.forEach((hotel) => {
-       console.log(hotel);
-    })
-})
+
